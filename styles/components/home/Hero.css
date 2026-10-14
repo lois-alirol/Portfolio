@@ -60,10 +60,10 @@
 
 .blinking-cursor {
   margin-left: 5px;
-  color: 
-#006eff;
+  color: #3b82f6;
   animation: blink 1s step-end infinite;
 }
+
 @keyframes blink {
   from, to { opacity: 1; }
   50% { opacity: 0; }

@@ -10,6 +10,7 @@ const Typewriter: React.FC = () => {
 
     const [subIndex, setSubIndex] = useState(0);
     const isFinished = subIndex === textToType.length;
+
     useEffect(() => {
         if (subIndex < textToType.length) {
             const timeout = setTimeout(() => {

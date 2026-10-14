@@ -36,7 +36,7 @@ export default function TransitionLink({
 
   return (
     <a href={localizedHref} onClick={handleClick} {...props}>
-      {children}
+      <span>{children}</span>
     </a>
   );
 }

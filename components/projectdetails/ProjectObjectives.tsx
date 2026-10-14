@@ -17,7 +17,6 @@ const ProjectObjectives: React.FC<ProjectObjectivesProps> = ({ objectives }) => 
       <div className="objectives-grid">
         {objectives.map((obj, i) => (
           <div key={i} className="objective-card">
-            <span className="obj-number">0{i + 1}</span>
             <p>{obj}</p>
           </div>
         ))}

@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useCallback, type ReactNode } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import React, {useCallback, type ReactNode} from "react";
 import { TranslationContext } from "@/components/context/TranslationContext";
 import { getNestedValue, renderWithPlaceholders } from "@/lib/translations";
+import {usePathname} from "next/navigation";
+import {useTransition} from "@/hooks/useTransition";
 
 type TranslationData = Record<string, unknown>;
 
@@ -18,7 +19,7 @@ export const TranslationProvider: React.FC<TranslationProviderProps> = ({
   language,
   translations,
 }) => {
-  const router = useRouter();
+  const { navigateWithTransition } = useTransition();
   const pathname = usePathname();
 
   const t = useCallback(
@@ -40,12 +41,11 @@ export const TranslationProvider: React.FC<TranslationProviderProps> = ({
   );
 
   const changeLanguage = useCallback(
-    (newLang: string) => {
-      const segments = pathname.split("/");
-      segments[1] = newLang;
-      router.push(segments.join("/"));
-    },
-    [pathname, router]
+      (newLang: string) => {
+        const newPath = pathname.replace(/^\/[^/]+/, `/${newLang}`);
+        navigateWithTransition(newPath);
+      },
+      [pathname, navigateWithTransition]
   );
 
   return (

@@ -19,7 +19,7 @@
   height: 12px;
   margin-top: -6px;
   margin-left: -6px;
-  background-color: #006eff;
+  background-color: #3b82f6;
 }
 
 .cursor-follower {
@@ -40,5 +40,5 @@
 
 .cursor-follower.hovering {
   opacity: 0.5;
-  border-color: #006eff;
+  border-color: #3b82f6;
 }

@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
         </a>
 
         <a
-          href="https://github.com/Neocle"
+          href="https://github.com/lois-alirol"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
@@ -37,16 +37,6 @@ const Footer: React.FC = () => {
           data-cursor="pointer"
         >
           <FaDiscord size={28}/>
-        </a>
-
-        <a
-          href="https://www.instagram.com/lois.alr43"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram"
-          data-cursor="pointer"
-        >
-          <FaInstagram size={28}/>
         </a>
       </div>
 

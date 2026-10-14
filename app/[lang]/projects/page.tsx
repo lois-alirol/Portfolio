@@ -10,59 +10,40 @@ import { useTitle } from "@/hooks/useTitle";
 
 import '@/styles/pages/Projects.css'
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 
 export default function Page() {
-  const { t } = useT();
+    const { t, tRich } = useT();
   
-  useTitle(`${t("projects.page-title")} | Loïs Alirol`);
+    useTitle(`${t("projects.page-title")} | Loïs Alirol`);
 
-  const observerRef = useRef<IntersectionObserver | null>(null);
-  const projectList = getProjects(t);
+    const projectList = getProjects(t);
+    let projectId = 0;
 
-  const leftCol = projectList.filter((_, i) => i % 2 === 0);
-  const rightCol = projectList.filter((_, i) => i % 2 !== 0);
+    const leftCol = projectList.filter((_, i) => i % 2 === 0);
+    const rightCol = projectList.filter((_, i) => i % 2 !== 0);
 
-  useEffect(() => {
-    const items = document.querySelectorAll('.project-item');
+    return (
+        <>
+            <main className="projects-page">
+                <h1 className="projects-title">{t("projects.title")}</h1>
+                <p className="projects-description">
+                    {tRich("projects.description", {
+                        github: <Link className="github-link" href="https://github.com/lois-alirol" target="_blank">Github</Link>
+                    })}
+                </p>
 
-    observerRef.current = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, index * 100);
-          observerRef.current?.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.05,
-      rootMargin: '0px'
-    });
+                <section className="projects-columns-container">
+                    <div className="column column-left">
+                        {leftCol.map(p => <ProjectCard key={p.id} project={p} side={projectId++ % 2 === 0 ? "LEFT" : "RIGHT"} />)}
+                    </div>
+                    <div className="column column-right">
+                        {rightCol.map(p => <ProjectCard key={p.id} project={p} side={projectId++ % 2 === 0 ? "LEFT" : "RIGHT"} />)}
+                    </div>
+                </section>
+            </main>
 
-    items.forEach((item) => observerRef.current?.observe(item));
-
-    return () => observerRef.current?.disconnect();
-  }, []);
-
-return (
-    <>
-      <CustomCursor />
-      <StarsCanvas />
-      <main className="projects-page">
-        <h1 className="projects-title">{t("projects.title")}</h1>
-        <p className="projects-description">{t("projects.description")}</p>
-
-        <section className="projects-columns-container">
-          <div className="column column-left">
-            {leftCol.map(p => <ProjectCard key={p.id} project={p} />)}
-          </div>
-          <div className="column column-right">
-            {rightCol.map(p => <ProjectCard key={p.id} project={p} />)}
-          </div>
-        </section>
-      </main>
-
-      <NextLink pathname="/contact" labelKey="projects.next-button"/>
-    </>
-  );
+            <NextLink pathname="/contact" labelKey="projects.next-button"/>
+        </>
+    );
 };

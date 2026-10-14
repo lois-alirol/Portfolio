@@ -2,6 +2,7 @@
 
 import React, { createContext, useCallback, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
+import { isValidLanguage } from "@/lib/languages";
 import { useLang } from "@/hooks/useLang";
 
 export interface TransitionContextValue {
@@ -28,9 +29,12 @@ export function TransitionContextProvider({
 
   const navigateWithTransition = useCallback(
     (href: string) => {
-      const localizedHref = href.startsWith(`/${lang}/`) || href === `/${lang}`
-        ? href
-        : `/${lang}${href.startsWith("/") ? href : `/${href}`}`;
+      const normalizedHref = href.startsWith("/") ? href : `/${href}`;
+      const destinationLang = normalizedHref.split("/")[1];
+
+      const localizedHref = isValidLanguage(destinationLang)
+          ? normalizedHref
+          : `/${lang}${normalizedHref}`;
 
       if (localizedHref === pathname) return;
 
@@ -38,10 +42,11 @@ export function TransitionContextProvider({
 
       setTimeout(() => {
         router.push(localizedHref);
+
         setTimeout(() => {
           setIsTransitioning(false);
         }, 150);
-      }, 200);
+      }, 800);
     },
     [router, pathname, lang]
   );

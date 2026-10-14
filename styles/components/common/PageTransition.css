@@ -1,19 +1,42 @@
 .page-transition {
-  pointer-events: none;
+  display: flex;
+  flex-direction: row;
   position: fixed;
   inset: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
-  opacity: 0;
-  transform: scale(1.02);
   z-index: 9999;
-  transition: 
-    opacity 0.50s ease-in-out,
-    transform 0.50s ease-in-out;
+  pointer-events: none;
 }
 
-.page-transition.show {
-  opacity: 1;
-  transform: scale(1);
+.page-transition .block {
+  flex: 1;
+  height: 100%;
+  background-color: #24529c;
+
+  transform: translateY(100%);
+  transition: transform 0.5s ease-in-out;
+  transition-delay: 0s;
+}
+
+.page-transition .block:nth-child(2) {
+  transition-delay: 0.05s;
+}
+
+.page-transition .block:nth-child(3) {
+  transition-delay: 0.1s;
+}
+
+.page-transition .block:nth-child(4) {
+  transition-delay: 0.15s;
+}
+
+.page-transition .block:nth-child(5) {
+  transition-delay: 0.2s;
+}
+
+.page-transition .block:nth-child(6) {
+  transition-delay: 0.25s;
+}
+
+.page-transition.show .block {
+  transform: translateY(0);
 }

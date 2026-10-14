@@ -5,35 +5,33 @@ import { DEFAULT_LANGUAGE, isValidLanguage } from "@/lib/languages";
 import { useTitle } from "@/hooks/useTitle";
 
 function detectLanguage(): string {
-  if (typeof navigator === "undefined") return DEFAULT_LANGUAGE;
+    if (typeof navigator === "undefined") return DEFAULT_LANGUAGE;
 
-  const languages = Array.isArray(navigator.languages)
-    ? navigator.languages
-    : navigator.language
-    ? [navigator.language]
-    : [];
+    const languages = Array.isArray(navigator.languages)
+        ? navigator.languages : navigator.language
+            ? [navigator.language] : [];
 
-  for (const lang of languages) {
-    if (!lang) continue;
+    for (const lang of languages) {
+        if (!lang) continue;
 
-    const lower = lang.toLowerCase();
-    if (isValidLanguage(lower)) return lower;
+        const lower = lang.toLowerCase();
+        if (isValidLanguage(lower)) return lower;
 
-    const base = lower.split("-")[0];
-    if (isValidLanguage(base)) return base;
-  }
+        const base = lower.split("-")[0];
+        if (isValidLanguage(base)) return base;
+    }
 
-  return DEFAULT_LANGUAGE;
+    return DEFAULT_LANGUAGE;
 }
 
 export default function RootPage() {
-  useTitle('Portfolio | Loïs Alirol');
+    useTitle('Portfolio | Loïs Alirol');
 
-  useEffect(() => {
-    const lang = detectLanguage();
-    const path = `/${lang}`;
-    window.location.replace(path);
-  }, []);
+    useEffect(() => {
+        const lang = detectLanguage();
+        const path = `/${lang}`;
+        window.location.replace(path);
+    }, []);
 
-  return null;
+    return null;
 }

@@ -23,7 +23,7 @@
   },
   "home": {
     "page-title": "Accueil",
-    "subtitle": "Étudiant en informatique, développeur logiciel",
+    "subtitle": "Développeur logiciel en formation",
     "description": {
       "value": "La plupart de mon temps libre, je le passe à concevoir et coder des {{projects}} assez cool. Quand je prend une pause, c'est souvent devant des jeux vidéo. Dans tous les cas, je suis disponible et vous pouvez {{contact}} quand vous voulez.",
       "projects-link": "PROJETS",
@@ -33,11 +33,14 @@
   },
   "about": {
     "page-title": "À propos",
-    "title": "À propos",
+    "title": {
+      "value": "Ce que {{highlighted}}",
+      "highlighted": "je fais"
+    },
     "description": "Mon parcours m'a permi d'acquérir certaines compétences, et surtout une manière de travailler pour être efficace et pour trouver des solutions.",
     "next-button": "Mes Projets",
     "skills": {
-      "title": "Compétences techniques",
+      "title": "Mon savoir-faire",
       "front": {
         "title": "Front-end",
         "description": "Conception d'interfaces web fluide privilégiant l'expérience utilisateur."
@@ -56,7 +59,7 @@
       }
     },
     "softskills": {
-      "title": "Compétences douces",
+      "title": "Ma façon de travailler",
       "1": {
         "title": "Persévérance",
         "description": "Je m'implique à fond dans mes projets et je reste présent pour aider les autres, même quand les choses deviennent difficiles ou que le projet stagne."
@@ -71,23 +74,23 @@
       }
     },
     "education": {
-      "title": "Formation",
+      "title": "D'où je viens",
       "1": {
         "title": "BUT Informatique Graphique",
         "school": "IUT du Puy En Velay",
-        "details": "Formation basée sur le développement logiciel et l'imagerie numérique, où j'apprends à concevoir des applications et des interfaces visuelles ainsi que les bases de l'informatique en général et de la modélisation 3D."
+        "details": "Formation basée sur le développement logiciel et l'imagerie numérique, où j'apprends à concevoir des applications et des interfaces visuelles ainsi que les bases de l'informatique en général."
       },
       "2": {
         "title": "Bac Général",
-        "school": "Lycée La Chartreuse, Brives - Charensac",
-        "details": "Spécialités scientifiques (Mathématiques et NSI, Physique en classe de Première), ce qui m'a permis de poser les bases du raisonnement logique et de découvrir les fondamentaux de la programmation en Python."
+        "school": "Lycée La Chartreuse",
+        "details": "Spécialités scientifiques (Mathématiques, NSI et Physique), ce qui m'a permis de construire un raisonnement et de découvrir les bases de la programmation en Python."
       }
     }
   },
   "projects": {
     "page-title": "Projets",
     "title": "Projets",
-    "description": "Voici une sélections de mes projets les plus importants. Cliquez dessus pour accéder à une explication plus détaillée de chacun d'entre eux. Vous pouvez en trouver plus sur mon Github!",
+    "description": "Les travaux universitaires, personnels ou même professionnels dont je suis le plus fier! Cliquez dessus pour avoir un détail de la conception jusqu'à la réalisation. La plupart sont aussi disponibles sur {{github}}",
     "category": "Projets",
     "next-button": "Contactez Moi",
 
@@ -111,7 +114,7 @@
     },
 
     "flexbans": {
-      "description": "FlexBans est un plugin multi-platforme pour serveur Minecraft qui permet de gerer les sanctions des joueurs dans une interface web.",
+      "description": "Un plug-in multi-platforme pour serveurs Minecraft de gestion des sanctions des joueurs en interface web.",
       "button": "Acheter sur BuiltByBit",
       "documentation-button": "Documentation",
       "context": "Dans le cadre du développement d'un serveur Minecraft, l'idée de changer le moyen de modération en jeu, qui était géré par un plug-in payant et inadapté, a émergé. En 2023, j'ai donc commencé le développement de FlexBans, qui avec une grosse différence pratique, possède une interface web permettant de faire toute action de modération, sans passer par la connection en jeu. À ce jour, le développement n'est pas terminé mais une majorité de fonctionnalités clés sont déjà présentes.",
@@ -145,15 +148,15 @@
         }
       },
       "academicValidation": {
-        "0": "C1 - Réaliser un développement d’application",
-        "1": "C4 - Gérer des données de l’information",
-        "2": "C5 - Conduire un projet"
+        "0": "Réaliser un développement d’application",
+        "1": "Gérer des données de l’information",
+        "2": "Conduire un projet"
       },
       "conclusion": "FlexBans est le projet auquel je me suis le plus consacré et n'ai jamais abandonné après plus de deux ans de développement et d'amélioration des features existantes. C'est mon premier vrai projet et j'ai appris énormément de techniques grâce à ça."
     },
 
     "img2ascii": {
-      "description": "Img2Ascii est une application console permettant de transformer n'importe quelle image en un dessin de caractères ASCII.",
+      "description": "Une application console permettant de transformer n'importe quelle image en un dessin de caractères ASCII.",
       "button": "Voir sur Github",
       "context": "Dans le cadre d'un projet universitaire (Situation d'Autonomie et d'Évaluation) de 12h, en binôme, nous devions créer en C++ une application console permettant de transformer une image en un ASCII Art, autrement dit, un dessin en charactères.",
       "objectives": {
@@ -183,13 +186,13 @@
         }
       },
       "academicValidation": {
-        "0": "C1 - Réaliser un développement d’application"
+        "0": "Réaliser un développement d’application"
       },
       "conclusion": "Ce projet m'a permis pour la première fois de travailler avec quelqu'un et donc de savoir s'adapter en groupe. Aussi, il m'a permis de découvrir ma capacité à coder efficacement, sous une pression de temps importante."
     },
 
     "ticketbot": {
-      "description": "Un bot pour Discord permettant au staff de serveurs communautaires, de gérer les plaintes, les demandes et tout problème de manière intuitive.",
+      "description": "Un robot permettant au personnel de serveurs communautaires, de gérer les plaintes, les demandes, etc. de leur membres.",
       "button": "Voir sur Github",
       "context": "Dans un serveur Discord dans lequel j'étais un des administateur, nous voulions un moyen de gérer efficacement les problèmes des membres. Après avoir essayé de nombreuses alternatives gratuites peu convaincantes, j'ai décidé de créer notre propre bot, avec toutes les fonctionnalités dont nous avons besoin.",
       "objectives": {
@@ -222,9 +225,9 @@
       },
 
       "academicValidation": {
-        "0": "C1 - Réaliser un développement d’application",
-        "1": "C4 - Gérer des données de l’information",
-        "2": "C5 - Conduire un projet"
+        "0": "Réaliser un développement d’application",
+        "1": "Gérer des données de l’information",
+        "2": "Conduire un projet"
       },
       "conclusion": "Créer TicketBot m’a surtout appris à gérer un vrai projet du début à la fin. Je me suis confronté à des problèmes concrets : permissions mal configurées, logique qui casse, stockage de données, organisation du code. Ça m’a obligé à structurer ma manière de développer et à réfléchir avant d’ajouter des fonctionnalités. Ce projet m’a aussi fait comprendre que faire fonctionner quelque chose ne suffit pas : il faut que ce soit clair, maintenable et réellement utile pour ceux qui l’utilisent."
     },
@@ -249,10 +252,8 @@
     "sent": "Message envoyé !",
     "info-header": "Informations",
     "info-text": "Je réponds personnellement à chaque message. N’hésitez donc pas à me contacter!",
-    "email-label": "Email direct",
-    "location-label": "Localisation & fuseau horaire",
-    "location-value": "France, St-Étienne (GMT+1)",
-    "response-time-label": "Temps de réponse estimé",
-    "response-time-value": "Sous 24 à 48 heures"
+    "email-label": "Adresse  email",
+    "location-label": "Localisation",
+    "location-value": "France, Le Puy en Velay"
   }
 }

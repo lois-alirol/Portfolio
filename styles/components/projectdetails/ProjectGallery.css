@@ -5,15 +5,6 @@
   display: inline-block;
   color: #fff;
 }
-.section-title::after {
-  content: '';
-  display: block;
-  width: 40px;
-  height: 3px;
-  background: #006eff;
-  margin-top: 8px;
-  border-radius: 2px;
-}
 
 .gallery-grid {
   display: grid;

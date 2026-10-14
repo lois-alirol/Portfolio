@@ -214,14 +214,4 @@ export const getProjects = (t: (key: string) => string): Project[] => [
       'https://placehold.co/600x400/1a1a1a/ffffff?text=Admin+Commands',
     ],
   },
-  {
-    id: "?",
-    title: t("projects.last.title"),
-    category: t("projects.category"),
-    image: `${BASE_PATH}/images/projects/last.webp`,
-    description: t("projects.last.description"),
-    tools: [],
-    context: t("projects.last.context"),
-    gallery: [],
-  },
 ];

@@ -1,128 +1,52 @@
-@media (max-width: 600px) {
-  .next-link {
-    padding: 16px 20px;
-    font-size: 1.1rem;
-    gap: 16px;
-    min-width: 180px;
-    border-radius: 40px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    justify-content: center;
-  }
-  .arrow-wrapper {
-    font-size: 2rem;
-  }
-  .text {
-    font-size: 1.1rem;
-  }
-  .svg-container {
-    border-radius: 40px;
-  }
-}
-
 .next-link {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  margin-left: auto; 
-  padding: 12px 28px;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 30;
+
+  display: flex;
+  flex-direction: row;
+  padding: 4px 12px;
   gap: 12px;
-  
-  color: #ffffff;
-  text-decoration: none;
+  color: black;
   font-family: 'Poppins', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
   text-transform: uppercase;
-  
-  background: transparent;
-  border-radius: 50px;
-  transition: transform 0.2s ease;
-  backface-visibility: hidden;
+  background: white;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  align-items: center;
+  animation: button-pulse 2.5s ease-in-out infinite;
 }
 
-.svg-container {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
+.next-link:hover::before {
+  transform: scaleX(1);
 }
 
-.border-svg {
-  width: 100%;
-  height: 100%;
-  overflow: visible; 
+.next-link:hover {
+  color: white;
 }
 
-.border-track {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.15);
-  stroke-width: 1.5;
-  transition: opacity 0.3s ease;
+.text, a {
+  z-index: 1000;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
 }
 
-.border-outline {
-  fill: none;
-  stroke: #ffffff;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-dasharray: 120 480; 
-  animation: infinite-draw 1.8s linear infinite;
-  transition: stroke-dasharray 0.5s ease, stroke-width 0.3s ease, filter 0.3s ease;
+.icon {
+  z-index: 1000;
 }
 
 .next-link:hover {
   transform: scale(0.98);
-  color: #006eff;
+  animation: none;
 }
 
-.next-link:hover .border-outline {
-  stroke: #006eff;
-  stroke-dasharray: 600 0;
-  stroke-width: 2.5;
-  filter: drop-shadow(0 0 8px rgba(0, 110, 255, 0.85));
-}
-
-.next-link:hover .border-track {
-  opacity: 0;
-}
-
-.next-link:hover .arrow-wrapper {
-  transform: translateX(6px);
-}
-
-@keyframes infinite-draw {
-  from {
-    stroke-dashoffset: 600;
+@keyframes button-pulse {
+  0%, 100% {
+    transform: scale(1);
   }
-  to {
-    stroke-dashoffset: 0;
+  50% {
+    transform: scale(1.05);
   }
-}
-
-.text {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-}
-
-.arrow-wrapper {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.6rem; 
-  line-height: 0; 
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.next-link:hover .arrow-wrapper {
-  transform: translateX(6px);
-  color: #006eff;
 }

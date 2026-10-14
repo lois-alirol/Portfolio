@@ -6,6 +6,7 @@ import { FaRegMoon, FaBars, FaTimes, FaCheck } from 'react-icons/fa';
 import { useT } from '@/hooks/useT';
 import TransitionLink from '@/components/common/TransitionLink';
 import { useTransition } from '@/hooks/useTransition';
+import {usePathname} from "next/navigation";
 
 const SUPPORTED_LANGUAGES = [
   { code: 'fr', label: 'navbar.languages.fr_FR' },
@@ -17,21 +18,9 @@ const SUPPORTED_LANGUAGES = [
 const Navbar: React.FC = () => {
   const { t, changeLanguage, currentLanguage } = useT();
   const { triggerTransition } = useTransition();
+  const pathname = usePathname();
 
-  const [isLangOpen, setIsLangOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const langMenuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (langMenuRef.current && !langMenuRef.current.contains(event.target as Node)) {
-        setIsLangOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -43,22 +32,11 @@ const Navbar: React.FC = () => {
 
   const handleLangChange = (lang: string) => {
     if (lang === currentLanguage) return;
-
-    setIsLangOpen(false);
-
-    triggerTransition(() => {
-      changeLanguage(lang);
-    });
+    changeLanguage(lang);
   };
 
   const handleThemeChange = () => {
-    triggerTransition(() => {
-      const root = document.documentElement;
-      const currentTheme = root.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      root.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-    });
+
   };
 
   const closeMenu = () => setIsMobileMenuOpen(false);
@@ -70,37 +48,31 @@ const Navbar: React.FC = () => {
       </TransitionLink>
 
       <div className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
-        <TransitionLink href={`/${currentLanguage}/about`} data-cursor="pointer" onClick={closeMenu}>{t("navbar.sections.about")}</TransitionLink>
-        <TransitionLink href={`/${currentLanguage}/projects`} data-cursor="pointer" onClick={closeMenu}>{t("navbar.sections.projects")}</TransitionLink>
-        <TransitionLink href={`/${currentLanguage}/exp`} data-cursor="pointer" onClick={closeMenu}>{t("navbar.sections.experiences")}</TransitionLink>
-        <TransitionLink href={`/${currentLanguage}/contact`} data-cursor="pointer" onClick={closeMenu}>{t("navbar.sections.contact")}</TransitionLink>
+        <TransitionLink href={`/${currentLanguage}/about`} className={pathname.includes('/about') ? "current" : ""} data-cursor="pointer" onClick={closeMenu}>{t("navbar.sections.about")}</TransitionLink>
+        <TransitionLink href={`/${currentLanguage}/projects`} className={pathname.includes('/projects') ? "current" : ""} data-cursor="pointer" onClick={closeMenu}>{t("navbar.sections.projects")}</TransitionLink>
+        {/*<TransitionLink href={`/${currentLanguage}/exp`} className={pathname.includes('/exp') ? "current" : ""} data-cursor="pointer" onClick={closeMenu}>{t("navbar.sections.experiences")}</TransitionLink>*/}
+        <TransitionLink href={`/${currentLanguage}/contact`} className={pathname.includes('/contact') ? "current" : ""} data-cursor="pointer" onClick={closeMenu}>{t("navbar.sections.contact")}</TransitionLink>
       </div>
 
       <div className="nav-actions">
-        <div className="lang-selector" ref={langMenuRef}>
-          <button
-            className={`icon-btn lang-trigger ${isLangOpen ? 'active' : ''}`}
-            onClick={() => setIsLangOpen(!isLangOpen)}
-            data-cursor="pointer"
-          >
+        <div className="lang-selector">
+          <span className="lang-trigger">
             {'// ' + currentLanguage}
-          </button>
+          </span>
 
-          {isLangOpen && (
-            <div className="lang-dropdown">
-              {SUPPORTED_LANGUAGES.map((lang) => (
-                <button
-                  key={lang.code}
-                  onClick={() => handleLangChange(lang.code)}
-                  data-cursor="pointer"
-                  className={currentLanguage === lang.code ? 'selected-lang' : ''}
-                >
+          <select
+              value={currentLanguage}
+              onChange={(e) => handleLangChange(e.target.value)}
+              className="lang-select"
+              aria-label="Select language"
+              data-cursor="pointer"
+          >
+            {SUPPORTED_LANGUAGES.map((lang) => (
+                <option key={lang.code} value={lang.code}>
                   {t(lang.label)}
-                  {currentLanguage === lang.code && <FaCheck size={10} style={{ marginLeft: 'auto' }} />}
-                </button>
-              ))}
-            </div>
-          )}
+                </option>
+            ))}
+          </select>
         </div>
 
         {/*

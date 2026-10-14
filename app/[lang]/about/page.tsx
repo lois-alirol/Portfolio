@@ -2,101 +2,96 @@
 
 import CustomCursor from "@/components/common/CustomCursor";
 import StarsCanvas from "@/components/common/StarCanvas";
-import { useEffect, useRef } from "react";
-import { getAboutDomains, getAboutEducation, getAboutSoftSkills } from "@/data/about";
+import {useState} from "react";
+import {getAboutDomains, getAboutEducation, getAboutSoftSkills, Tech} from "@/data/about";
 import { useT } from "@/hooks/useT";
 import { useTitle } from "@/hooks/useTitle";
 
 import '@/styles/pages/About.css'
 import NextLink from "@/components/common/NextLink";
+import Image from "next/image";
 
 export default function Page() {
-  const { t } = useT();
-  useTitle(`${t('about.page-title')} | Loïs Alirol`);
+    const { t, tRich } = useT();
+    useTitle(`${t('about.page-title')} | Loïs Alirol`);
 
-  const observerRef = useRef<IntersectionObserver | null>(null);
+    const domains = getAboutDomains(t);
+    const softSkills = getAboutSoftSkills(t);
+    const education = getAboutEducation(t).slice().reverse();
 
-  useEffect(() => {
-    const items = document.querySelectorAll('.animate-item');
-
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observerRef.current?.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    const [activeTimeline, setActiveTimeline] = useState<string | null>(
+        education[0]?.id ?? null
     );
 
-    items.forEach((item) => observerRef.current?.observe(item));
+    return (
+        <>
+            <main className="about-page">
+                <h1 className="about-title">
+                    {tRich('about.title.value', {
+                        highlighted: <span className={"blue-text"}>{t('about.title.highlighted')}</span>
+                    })}
+                </h1>
+                <p className="about-description">{t('about.description')}</p>
 
-    return () => observerRef.current?.disconnect();
-  }, []);
+                <h2 className="about-section-title">{t('about.skills.title')}</h2>
+                <section className="about-grid">
+                    {domains.map((domain) => (
+                        <article key={domain.id} className="about-card animate-item">
+                            <header className="about-card-header">
+                                <h3 className="about-card-title">{domain.title}</h3>
+                                <p className="about-card-desc">{domain.description}</p>
+                            </header>
 
-  const domains = getAboutDomains(t);
-  const softSkills = getAboutSoftSkills(t);
-  const education = getAboutEducation(t);
+                            <div className="tech-chips">
+                                {domain.techs.map((tech: Tech) => (
+                                    <div className="tech" key={tech.name}>
+                                        <Image src={tech.icon_url} width={28} height={28} alt={`${tech.name} icon`}/>
+                                        <p>{tech.name}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </article>
+                    ))}
+                </section>
 
-  return (
-    <>
-      <CustomCursor />
-      <StarsCanvas />
-      <main className="about-page">
-        <h1 className="about-title">{t('about.title')}</h1>
-        <p className="about-description">{t('about.description')}</p>
+                <h2 className="about-section-title">{t('about.softskills.title')}</h2>
+                <section className="softskills-grid">
+                    {softSkills.map((skill) => (
+                        <div key={skill.id} className="softskill-item animate-item">
+                            <h3 className="softskill-title">{skill.title}</h3>
+                            <p className="softskill-desc">{skill.description}</p>
+                        </div>
+                    ))}
+                </section>
 
-        <h2 className="about-section-title">{t('about.skills.title')}</h2>
-        <section className="about-grid">
-          {domains.map((domain) => (
-            <article key={domain.id} className="about-card animate-item">
-              <header className="about-card-header">
-                <h3 className="about-card-title">{domain.title}</h3>
-                <p className="about-card-desc">{domain.description}</p>
-              </header>
+                <h2 className="about-section-title">{t('about.education.title')}</h2>
+                <section className="timeline">
+                    {education.map((item) => {
+                        const isActive = activeTimeline === item.id;
 
-              <div className="tech-chips">
-                {domain.techs.map((tech) => (
-                  <span key={`${domain.id}-${tech}`} className="tech-chip">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </article>
-          ))}
-        </section>
+                        return (
+                            <div
+                                key={item.id}
+                                className={`timeline-part ${isActive ? "active" : ""}`}
+                                onMouseEnter={() => setActiveTimeline(item.id)}
+                            >
+                                <div className="timeline-content">
+                                    <h3 className="timeline-title">
+                                        {item.title} - {item.school}
+                                        <span className="timeline-dates">{item.period}</span>
+                                    </h3>
 
-        <h2 className="about-section-title">{t('about.softskills.title')}</h2>
-        <section className="softskills-grid">
-          {softSkills.map((skill) => (
-            <div key={skill.id} className="softskill-item animate-item">
-              <h3 className="softskill-title">{skill.title}</h3>
-              <p className="softskill-desc">{skill.description}</p>
-            </div>
-          ))}
-        </section>
+                                    <p className="timeline-description">
+                                        {item.details}
+                                    </p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </section>
+            </main>
 
-        <h2 className="about-section-title">{t('about.education.title')}</h2>
-        <section className="education-timeline">
-          {education.map((item) => (
-            <article key={item.id} className="timeline-item animate-item">
-              <div className="timeline-dot"></div>
-              <div className="timeline-content">
-                <div className="education-header">
-                  <h3 className="education-title">{item.title}</h3>
-                  <span className="education-date">{item.period}</span>
-                </div>
-                <p className="education-school">{item.school}</p>
-                {item.details && <p className="education-details">{item.details}</p>}
-              </div>
-            </article>
-          ))}
-        </section>
-      </main>
-
-      <NextLink pathname="/projects" labelKey="about.next-button"/>
-    </>
-  );
+            <NextLink pathname="/projects" labelKey="about.next-button"/>
+        </>
+    );
 };

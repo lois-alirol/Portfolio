@@ -21,13 +21,12 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   position: relative;
-  background-image: 
-    radial-gradient(circle at 20% 30%, rgba(0, 110, 255, 0.14), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(255, 0, 150, 0.1), transparent 40%),
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(135deg, #080808 0%, #0d0d12 40%, #050507 100%);
-  background-size: 100% 100%, 100% 100%, 100px 100px, 100px 100px, 100% 100%;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(33, 49, 96, 0.25), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(140, 210, 255, 0.1), transparent 40%),
+    linear-gradient(rgba(255, 255, 255, 0.04) 4px, transparent 4px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 4px, transparent 4px);
+  background-size: 100% 100%, 100% 100%, 120px 120px, 120px 120px;
   background-attachment: fixed;
 }
 
@@ -40,7 +39,66 @@ html, body, #root {
   z-index: 2;
 }
 
+.blue-text {
+  color: #3b82f6;
+}
+
 ::selection {
-  background: #006eff24;
+  background: #3b82f624;
   color: white;
+}
+
+.main-content {
+  transition: transform 0.8s cubic-bezier(.76,0,.24,1), filter 0.6s ease;
+}
+
+.main-content.transitioning {
+  transform: scale(0.97);
+  filter: blur(4px);
+}
+
+/* Modern browsers — Chrome 121+, Edge 121+, Firefox, Safari 18.2+ */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #24529c rgba(0, 0, 0, 0);
+}
+
+/* Legacy WebKit — older Chrome/Edge/Safari, radius, borders & shadows */
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: #000000;
+  border-radius: 8px;
+  padding: 1px;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: #bfdbfe;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: #93c5fd;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #24529c;
+  border-radius: 8px;
+  min-height: 10px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #2563eb;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #1d4ed8;
+}
+
+*::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
 }

@@ -1,9 +1,10 @@
 import React from 'react';
 import '@/styles/components/projectdetails/ProjectHero.css';
 import type { ProjectLink } from '@/data/projects';
-import { FaArrowLeft, FaLink } from 'react-icons/fa';
-import { useTransition } from '@/hooks/useTransition';
-import { useT } from '@/hooks/useT';
+import {FaChevronRight, FaLink} from 'react-icons/fa';
+import Link from "next/link";
+import TransitionLink from "@/components/common/TransitionLink";
+import {useT} from "@/hooks/useT";
 
 interface ProjectHeroProps {
   title: string;
@@ -12,23 +13,18 @@ interface ProjectHeroProps {
 }
 
 const ProjectHero: React.FC<ProjectHeroProps> = ({ title, description, links }) => {
-  const { navigateWithTransition } = useTransition();
   const { t } = useT();
-  
+
   return (
     <section className="project-hero">
       <div className="hero-overlay">
         <div className="hero-content">
 
-          <button
-            className="back-btn"
-            onClick={() => navigateWithTransition("/projects")}
-            aria-label="Go back"
-            data-cursor="pointer"
-          >
-            <FaArrowLeft />
-            <span>{t("projects.project.back")}</span>
-          </button>
+          <div className="location-bar">
+            <TransitionLink href={"/projects"} data-cursor="pointer">{t("projects.title")}</TransitionLink>
+            <FaChevronRight className="icon" size={12} />
+            <span>{title}</span>
+          </div>
 
           <h1 className="hero-title">{title}</h1>
           <p className="hero-subtitle">{description}</p>
@@ -43,8 +39,7 @@ const ProjectHero: React.FC<ProjectHeroProps> = ({ title, description, links }) 
                   rel="noopener noreferrer"
                   className="hero-cta"
                   style={{ 
-                    backgroundColor: link.color,
-                    boxShadow: link.color ? "none" : undefined
+                    backgroundColor: link.color
                   }}
                   data-cursor="pointer"
                 >

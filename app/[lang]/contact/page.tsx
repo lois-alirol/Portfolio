@@ -6,166 +6,135 @@ import { useT } from "@/hooks/useT";
 import { useTitle } from "@/hooks/useTitle";
 
 import '@/styles/pages/Contact.css'
-import { useEffect, useRef, useState } from "react";
-import emailjs from '@emailjs/browser';
+import React, { useState } from "react";
+import emails from '@emailjs/browser';
 import NextLink from "@/components/common/NextLink";
 
 export default function Page() {
-  const { t } = useT();
-  useTitle(`${t("contact.page-title")} | Loïs Alirol`);
+    const { t } = useT();
+    useTitle(`${t("contact.page-title")} | Loïs Alirol`);
 
-  const observerRef = useRef<IntersectionObserver | null>(null);
+    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+    const [status, setStatus] = useState<'idle' | 'sending' | 'success'>('idle');
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success'>('idle');
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    const handleSubmit = async (e: React.SubmitEvent) => {
+        e.preventDefault();
+        setErrorMessage(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorMessage(null);
+        const lastSent = localStorage.getItem("5GDBhf63Bdfhey63Gfhst9Y27RKslfbzg53hfj?/jfye.urfn");
+        const now = Date.now();
 
-    const lastSent = localStorage.getItem("5GDBhf63Bdfhey63Gfhst9Y27RKslfbzg53hfj?/jfye.urfn");
-    const now = Date.now();
-
-    if (lastSent && now - Number(lastSent) < 86400000) {
-      setErrorMessage(t("contact.wait-before-message"));
-      return;
-    }
-
-    setStatus('sending');
-
-    try {
-      await emailjs.send(
-        'service_32att7n',
-        'template_9d4fk6r',
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
-        },
-        'PNSOWKX7PAEfELwwa'
-      );
-
-      localStorage.setItem("5GDBhf63Bdfhey63Gfhst9Y27RKslfbzg53hfj?/jfye.urfn", now.toString());
-      setStatus('success');
-      setFormData({ name: '', email: '', message: '' });
-
-    } catch (error) {
-      console.error(error);
-      setStatus('idle');
-      setErrorMessage("Something went wrong. Please try again later.");
-    }
-  };
-
-  useEffect(() => {
-    const items = document.querySelectorAll('.animate-item');
-
-    observerRef.current = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observerRef.current?.unobserve(entry.target);
+        if (lastSent && now - Number(lastSent) < 86400000) {
+            setErrorMessage(t("contact.wait-before-message"));
+            return;
         }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    });
 
-    items.forEach((item) => observerRef.current?.observe(item));
+        setStatus('sending');
 
-    return () => observerRef.current?.disconnect();
-  }, []);
+        try {
+            await emails.send(
+                'service_32att7n',
+                'template_9d4fk6r',
+                {
+                    from_name: formData.name,
+                    from_email: formData.email,
+                    message: formData.message,
+                },
+                    'PNSOWKX7PAEfELwwa'
+            );
 
-  return (
-    <>
-      <CustomCursor />
-      <StarsCanvas />
-      <main className="contact-page">
-        <h1 className="contact-title">{t("contact.title")}</h1>
-        <p className="contact-description">{t("contact.description")}</p>
+            localStorage.setItem("5GDBhf63Bdfhey63Gfhst9Y27RKslfbzg53hfj?/jfye.urfn", now.toString());
+            setStatus('success');
+            setFormData({ name: '', email: '', message: '' });
+        } catch (error) {
+            console.error(error);
+            setStatus('idle');
+            setErrorMessage("Something went wrong. Please try again later.");
+        }
+    };
 
-        <section className="contact-columns-container">
-          <div className="column column-left animate-item">
-            <h3 className="section-header">{t("contact.form-header")}</h3>
-            <form className="contact-form" onSubmit={handleSubmit}>
-              <div className="input-group">
-                <input 
-                  type="text" 
-                  name="name" 
-                  placeholder={t("contact.name-placeholder")} 
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="input-group">
-                <input 
-                  type="email" 
-                  name="email" 
-                  placeholder={t("contact.email-placeholder")} 
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="input-group">
-                <textarea 
-                  name="message" 
-                  placeholder={t("contact.message-placeholder")} 
-                  rows={6}
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
+    return (
+        <>
+            <main className="contact-page">
+                <h1 className="contact-title">{t("contact.title")}</h1>
+                <p className="contact-description">{t("contact.description")}</p>
 
-              {errorMessage && (
-                <div className="error-message">
-                  <span className="error-icon">!</span>
-                  {errorMessage}
-                </div>
-              )}
+                <section className="contact-columns-container">
+                    <div className="column column-left">
+                        <h3 className="section-header">{t("contact.form-header")}</h3>
+                        <form className="contact-form" onSubmit={handleSubmit}>
+                            <div className="input-group">
+                                <input
+                                    type="text"
+                                    name="name"
+                                    placeholder={t("contact.name-placeholder")}
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="input-group">
+                                <input
+                                    type="email"
+                                    name="email"
+                                    placeholder={t("contact.email-placeholder")}
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="input-group">
+                                <textarea
+                                    name="message"
+                                    placeholder={t("contact.message-placeholder")}
+                                    rows={6}
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
 
-              <button type="submit" className={`submit-btn ${status}`}>
-                {status === 'sending' ? t("contact.sending") 
-                 : status === 'success' ? t("contact.sent") 
-                 : t("contact.submit")}
-              </button>
-            </form>
-          </div>
+                            {errorMessage && (
+                                <div className="error-message">
+                                    <span className="error-icon">!</span>
+                                    {errorMessage}
+                                </div>
+                            )}
 
-          <div className="column column-right animate-item">
-            <h3 className="section-header">{t("contact.info-header")}</h3>
-            <p className="info-text">{t("contact.info-text")}</p>
-            
-            <div className="contact-details">
-                <div className="detail-item">
-                    <span className="label">{t("contact.email-label")}</span>
-                    <a href="mailto:contact@loisalirol.com" className="value email-marker">
-                        contact@loisalirol.com
-                    </a>
-                </div>
+                            <button type="submit" className={`submit-btn ${status}`}>
+                                {status === 'sending' ? t("contact.sending")
+                                    : status === 'success' ? t("contact.sent")
+                                    : t("contact.submit")}
+                            </button>
+                        </form>
+                    </div>
+                    <div className="column column-right">
+                        <h3 className="section-header">{t("contact.info-header")}</h3>
+                        <p className="info-text">{t("contact.info-text")}</p>
 
-                <div className="detail-item">
-                    <span className="label">{t("contact.location-label")}</span>
-                    <span className="value">{t("contact.location-value")}</span>
-                </div>
+                        <div className="contact-details">
+                            <div className="detail-item">
+                                <span className="label">{t("contact.email-label")}</span>
+                                <a href="mailto:contact@loisalirol.com" className="value email-marker">
+                                    contact@loisalirol.com
+                                </a>
+                            </div>
 
-                <div className="detail-item">
-                    <span className="label">{t("contact.response-time-label")}</span>
-                    <span className="value">{t("contact.response-time-value")}</span>
-                </div>
-            </div>
-          </div>
-        </section>
-      </main>
+                            <div className="detail-item">
+                                <span className="label">{t("contact.location-label")}</span>
+                                <span className="value">{t("contact.location-value")}</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
 
-      <NextLink pathname="/" labelKey="contact.next-button"/>
-    </>
-  );
+            <NextLink pathname="/" labelKey="contact.next-button"/>
+        </>
+    );
 };

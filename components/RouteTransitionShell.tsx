@@ -2,7 +2,6 @@
 
 import React, { useEffect } from "react";
 
-import { TransitionContextProvider } from "@/components/context/TransitionContext";
 import PageTransition from "./common/PageTransition";
 import StarsCanvas from "./common/StarCanvas";
 import CustomCursor from "./common/CustomCursor";
@@ -30,7 +29,13 @@ function ShellContent({ children }: { children: React.ReactNode }) {
       <StarsCanvas />
       <CustomCursor />
       <Navbar />
-      <main className="main-content">{children}</main>
+        <main
+            className={`main-content${
+                isTransitioning ? " transitioning" : ""
+            }`}
+        >
+            {children}
+        </main>
       <Footer />
     </>
   );
@@ -42,8 +47,6 @@ export default function RouteTransitionShell({
   children: React.ReactNode;
 }) {
   return (
-    <TransitionContextProvider>
       <ShellContent>{children}</ShellContent>
-    </TransitionContextProvider>
   );
 }
