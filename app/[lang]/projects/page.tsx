@@ -1,15 +1,12 @@
 "use client"
 
-import CustomCursor from "@/components/common/CustomCursor";
 import NextLink from "@/components/common/NextLink";
-import StarsCanvas from "@/components/common/StarCanvas";
 import ProjectCard from "@/components/projects/ProjectCard";
 import { getProjects } from "@/data/projects";
 import { useT } from "@/hooks/useT";
 import { useTitle } from "@/hooks/useTitle";
 
 import '@/styles/pages/Projects.css'
-import { useEffect, useRef } from "react";
 import Link from "next/link";
 
 export default function Page() {

@@ -1,7 +1,5 @@
 "use client"
 
-import CustomCursor from "@/components/common/CustomCursor";
-import StarsCanvas from "@/components/common/StarCanvas";
 import TransitionLink from "@/components/common/TransitionLink";
 import Hero from "@/components/home/Hero";
 import NextLink from "@/components/common/NextLink";

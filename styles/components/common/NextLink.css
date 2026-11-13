@@ -18,12 +18,8 @@
   animation: button-pulse 2.5s ease-in-out infinite;
 }
 
-.next-link:hover::before {
-  transform: scaleX(1);
-}
-
 .next-link:hover {
-  color: white;
+  color: black;
 }
 
 .text, a {

@@ -2,8 +2,6 @@
 
 import '@/styles/pages/ProjectDetails.css'
 
-import CustomCursor from "@/components/common/CustomCursor";
-import StarsCanvas from "@/components/common/StarCanvas";
 import Lightbox from "@/components/projectdetails/LightBox";
 import ProjectGallery from "@/components/projectdetails/ProjectGallery";
 import ProjectHero from "@/components/projectdetails/ProjectHero";

@@ -42,6 +42,8 @@ export const TranslationProvider: React.FC<TranslationProviderProps> = ({
 
   const changeLanguage = useCallback(
       (newLang: string) => {
+        localStorage.setItem("language", newLang);
+        
         const newPath = pathname.replace(/^\/[^/]+/, `/${newLang}`);
         navigateWithTransition(newPath);
       },

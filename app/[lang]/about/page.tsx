@@ -1,7 +1,5 @@
 "use client"
 
-import CustomCursor from "@/components/common/CustomCursor";
-import StarsCanvas from "@/components/common/StarCanvas";
 import {useState} from "react";
 import {getAboutDomains, getAboutEducation, getAboutSoftSkills, Tech} from "@/data/about";
 import { useT } from "@/hooks/useT";

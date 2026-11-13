@@ -7,8 +7,11 @@ import { useTitle } from "@/hooks/useTitle";
 function detectLanguage(): string {
     if (typeof navigator === "undefined") return DEFAULT_LANGUAGE;
 
+    const languageStored = localStorage.getItem("language") ?? "";
+    if (isValidLanguage(languageStored)) return languageStored;
+
     const languages = Array.isArray(navigator.languages)
-        ? navigator.languages : navigator.language
+            ? navigator.languages : navigator.language
             ? [navigator.language] : [];
 
     for (const lang of languages) {

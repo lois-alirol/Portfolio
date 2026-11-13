@@ -2,8 +2,6 @@ import "@/styles/App.css";
 import {Metadata, Viewport} from "next";
 import { ReactNode } from "react";
 import {TransitionContextProvider} from "@/components/context/TransitionContext";
-import CustomCursor from "@/components/common/CustomCursor";
-import StarsCanvas from "@/components/common/StarCanvas";
 
 export const viewport: Viewport = {
     themeColor: '#3B82F6',

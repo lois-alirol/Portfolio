@@ -4,7 +4,7 @@
       "about": "à_propos()",
       "projects": "projets()",
       "experiences": "expériences()",
-      "contact": "contact();"
+      "contact": "contact()"
     },
     "languages": {
       "fr_FR": "Français",
@@ -37,7 +37,7 @@
       "value": "Ce que {{highlighted}}",
       "highlighted": "je fais"
     },
-    "description": "Mon parcours m'a permi d'acquérir certaines compétences, et surtout une manière de travailler pour être efficace et pour trouver des solutions.",
+    "description": "Mon parcours m'a permi d'obtenir certaines compétences et une manière de travailler efficace.",
     "next-button": "Mes Projets",
     "skills": {
       "title": "Mon savoir-faire",
@@ -78,7 +78,7 @@
       "1": {
         "title": "BUT Informatique Graphique",
         "school": "IUT du Puy En Velay",
-        "details": "Formation basée sur le développement logiciel et l'imagerie numérique, où j'apprends à concevoir des applications et des interfaces visuelles ainsi que les bases de l'informatique en général."
+        "details": "Formation basée sur le développement appliqué au numérique dans laquelle j'apprends les bases de l'informatiquen, à concevoir des applications et des interfaces visuelles."
       },
       "2": {
         "title": "Bac Général",
@@ -241,7 +241,7 @@
   "contact": {
     "page-title": "Contact",
     "title": "Parlons-en",
-    "description": "Un projet, une question ou simplement envie d’échanger ? Je suis toujours ouvert à discuter d’idées, de collaborations ou bien du beau temps.",
+    "description": "Un projet, une question ou simplement envie d’échanger ? Je suis toujours ouvert à discuter d’idées, de tout et de rien",
     "next-button": "Revenir Au Début",
     "form-header": "Envoyer un message",
     "name-placeholder": "Votre nom",

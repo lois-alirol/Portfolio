@@ -1,7 +1,5 @@
 "use client"
 
-import CustomCursor from "@/components/common/CustomCursor";
-import StarsCanvas from "@/components/common/StarCanvas";
 import { useT } from "@/hooks/useT";
 import { useTitle } from "@/hooks/useTitle";
 

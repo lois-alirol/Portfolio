@@ -3,8 +3,6 @@
 import '@/styles/pages/errors/Error404.css';
 import {useT} from "@/hooks/useT";
 import {useTitle} from "@/hooks/useTitle";
-import CustomCursor from "@/components/common/CustomCursor";
-import StarsCanvas from "@/components/common/StarCanvas";
 import TransitionLink from "@/components/common/TransitionLink";
 import {FaCode} from "react-icons/fa";
 import React from "react";

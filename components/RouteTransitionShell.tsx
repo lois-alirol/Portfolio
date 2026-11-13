@@ -3,7 +3,6 @@
 import React, { useEffect } from "react";
 
 import PageTransition from "./common/PageTransition";
-import StarsCanvas from "./common/StarCanvas";
 import CustomCursor from "./common/CustomCursor";
 import Navbar from "./common/Navbar";
 import Footer from "./common/Footer";
@@ -26,7 +25,6 @@ function ShellContent({ children }: { children: React.ReactNode }) {
   return (
     <>
       <PageTransition show={isTransitioning} />
-      <StarsCanvas />
       <CustomCursor />
       <Navbar />
         <main

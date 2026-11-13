@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import '@/styles/components/common/Navbar.css';
-import { FaRegMoon, FaBars, FaTimes, FaCheck } from 'react-icons/fa';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import { useT } from '@/hooks/useT';
 import TransitionLink from '@/components/common/TransitionLink';
-import { useTransition } from '@/hooks/useTransition';
 import {usePathname} from "next/navigation";
 
 const SUPPORTED_LANGUAGES = [
@@ -17,7 +16,6 @@ const SUPPORTED_LANGUAGES = [
 
 const Navbar: React.FC = () => {
   const { t, changeLanguage, currentLanguage } = useT();
-  const { triggerTransition } = useTransition();
   const pathname = usePathname();
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -33,10 +31,6 @@ const Navbar: React.FC = () => {
   const handleLangChange = (lang: string) => {
     if (lang === currentLanguage) return;
     changeLanguage(lang);
-  };
-
-  const handleThemeChange = () => {
-
   };
 
   const closeMenu = () => setIsMobileMenuOpen(false);
