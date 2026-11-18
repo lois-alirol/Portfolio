@@ -24,18 +24,14 @@
   "home": {
     "page-title": "Accueil",
     "subtitle": "Développeur logiciel en formation",
-    "description": {
-      "value": "La plupart de mon temps libre, je le passe à concevoir et coder des {{projects}} assez cool. Quand je prend une pause, c'est souvent devant des jeux vidéo. Dans tous les cas, je suis disponible et vous pouvez {{contact}} quand vous voulez.",
-      "projects-link": "PROJETS",
-      "contact-link": "ME CONTACTER"
-    },
+    "description": "La plupart de mon temps libre, je le passe à concevoir et coder des <projects>PROJETS</projects> assez cool. Quand je prend une pause, c'est souvent devant des jeux vidéo. Dans tous les cas, je suis disponible et vous pouvez <contact>ME CONTACTER</contact> quand vous voulez.",
     "next-button": "Découvrir plus"
   },
   "about": {
     "page-title": "À propos",
-    "title": {
-      "value": "Ce que {{highlighted}}",
-      "highlighted": "je fais"
+    "title": "Ce que <highlighted>je fais</highlighted>",
+    "cv": {
+      "button": "Voir mon CV"
     },
     "description": "Mon parcours m'a permi d'obtenir certaines compétences et une manière de travailler efficace.",
     "next-button": "Mes Projets",
@@ -90,7 +86,7 @@
   "projects": {
     "page-title": "Projets",
     "title": "Projets",
-    "description": "Les travaux universitaires, personnels ou même professionnels dont je suis le plus fier! Cliquez dessus pour avoir un détail de la conception jusqu'à la réalisation. La plupart sont aussi disponibles sur {{github}}",
+    "description": "Les travaux universitaires, personnels ou même professionnels dont je suis le plus fier! Cliquez dessus pour avoir un détail de la conception jusqu'à la réalisation. La plupart sont aussi disponibles sur <github>Github</github>",
     "category": "Projets",
     "next-button": "Contactez Moi",
 
@@ -241,7 +237,7 @@
   "contact": {
     "page-title": "Contact",
     "title": "Parlons-en",
-    "description": "Un projet, une question ou simplement envie d’échanger ? Je suis toujours ouvert à discuter d’idées, de tout et de rien",
+    "description": "Un projet ? Une question ? Ou juste envie d’échanger ? Je suis toujours partant pour parler de tout et de rien",
     "next-button": "Revenir Au Début",
     "form-header": "Envoyer un message",
     "name-placeholder": "Votre nom",
@@ -251,9 +247,9 @@
     "sending": "Envoi...",
     "sent": "Message envoyé !",
     "info-header": "Informations",
-    "info-text": "Je réponds personnellement à chaque message. N’hésitez donc pas à me contacter!",
+    "info-text": "Je réponds à chaque message donc n'hésitez pas à m'envoyer un message",
     "email-label": "Adresse  email",
     "location-label": "Localisation",
-    "location-value": "France, Le Puy en Velay"
+    "location-value": "France, Le Puy-en-Velay"
   }
 }

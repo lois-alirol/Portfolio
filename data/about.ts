@@ -20,7 +20,8 @@ export interface EducationItem {
   id: string;
   title: string;
   school: string;
-  period: string;
+  from: number;
+  to: number | 'now';
   details?: string;
 }
 
@@ -105,14 +106,16 @@ export const getAboutEducation = (t: (key: string) => string): EducationItem[] =
     id: 'edu-1',
     title: t('about.education.1.title'),
     school: t('about.education.1.school'),
-    period: "Depuis 2025",
+    from: 2025,
+    to: "now",
     details: t('about.education.1.details'),
   },
   {
     id: 'edu-2',
     title: t('about.education.2.title'),
     school: t('about.education.2.school'),
-    period: "2022-2025",
+    from: 2022,
+    to: 2025,
     details: t('about.education.2.details'),
   },
 ];
